@@ -1,0 +1,268 @@
+<section class="clima-page">
+
+  <!-- ENCABEZADO -->
+
+  <div class="clima-header">
+
+    <div class="header-icon">
+      ☀️
+    </div>
+
+    <div>
+      <span class="subtitulo">
+        INFORMACIÓN METEOROLÓGICA
+      </span>
+
+      <h1>
+        Clima y recomendación vehicular
+      </h1>
+
+      <p>
+        Consulta las condiciones climáticas de una ciudad
+        y conoce recomendaciones para el cuidado de tu vehículo.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- BUSCADOR -->
+
+  <div class="busqueda">
+
+    <div class="campo">
+
+      <label for="ciudad">
+        Buscar ciudad
+      </label>
+
+      <input
+        id="ciudad"
+        type="text"
+        [(ngModel)]="ciudad"
+        name="ciudad"
+        placeholder="Ej. Quito, Guayaquil..."
+        (keyup.enter)="consultar()">
+
+    </div>
+
+    <button
+      type="button"
+      class="btn-consultar"
+      (click)="consultar()">
+
+      🔎 Consultar clima
+
+    </button>
+
+  </div>
+
+
+  <!-- ERROR -->
+
+  @if (mensajeError) {
+
+    <div class="alerta error">
+
+      ⚠️ {{ mensajeError }}
+
+    </div>
+
+  }
+
+
+  <!-- CARGANDO -->
+
+  @if (cargando) {
+
+    <div class="cargando">
+
+      <div class="cargando-icono">
+        ⏳
+      </div>
+
+      <div>
+        <strong>
+          Consultando clima...
+        </strong>
+
+        <p>
+          Obteniendo información meteorológica.
+        </p>
+      </div>
+
+    </div>
+
+  }
+
+
+  <!-- RESULTADO -->
+
+  @if (resultado) {
+
+    <div class="contenido-clima">
+
+
+      <!-- TARJETA PRINCIPAL -->
+
+      <div class="clima-card">
+
+        <div class="clima-icono">
+          {{ obtenerIcono() }}
+        </div>
+
+        <div class="clima-info">
+
+          <span class="ubicacion">
+            📍 {{ resultado.pais }}
+          </span>
+
+          <h2>
+            {{ resultado.ciudad }}
+          </h2>
+
+          <div class="temperatura">
+            {{ resultado.temperatura }}°
+            <span>C</span>
+          </div>
+
+          <p class="condicion">
+            {{ resultado.condicion }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- INFORMACIÓN -->
+
+      <div class="informacion-grid">
+
+
+        <div class="dato">
+
+          <div class="dato-icono">
+            🌡️
+          </div>
+
+          <div>
+            <span>
+              Sensación térmica
+            </span>
+
+            <strong>
+              {{ resultado.sensacion }} °C
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="dato">
+
+          <div class="dato-icono">
+            💧
+          </div>
+
+          <div>
+            <span>
+              Humedad
+            </span>
+
+            <strong>
+              {{ resultado.humedad }} %
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="dato">
+
+          <div class="dato-icono">
+            🌧️
+          </div>
+
+          <div>
+            <span>
+              Precipitación
+            </span>
+
+            <strong>
+              {{ resultado.precipitacion }} mm
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="dato">
+
+          <div class="dato-icono">
+            💨
+          </div>
+
+          <div>
+            <span>
+              Viento
+            </span>
+
+            <strong>
+              {{ resultado.viento }} km/h
+            </strong>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- RECOMENDACIÓN -->
+
+      <div class="recomendacion">
+
+        <div class="recomendacion-cabecera">
+
+          <div class="auto-icono">
+            🚗
+          </div>
+
+          <div>
+
+            <span>
+              CONSEJO PARA TU VEHÍCULO
+            </span>
+
+            <h2>
+              Recomendación vehicular
+            </h2>
+
+          </div>
+
+        </div>
+
+        <p>
+          {{ resultado.recomendacion }}
+        </p>
+
+      </div>
+
+
+      <!-- API -->
+
+      <div class="fuente-api">
+
+        <span class="punto"></span>
+
+        Información proporcionada por una API
+        meteorológica externa.
+
+      </div>
+
+    </div>
+
+  }
+
+</section>

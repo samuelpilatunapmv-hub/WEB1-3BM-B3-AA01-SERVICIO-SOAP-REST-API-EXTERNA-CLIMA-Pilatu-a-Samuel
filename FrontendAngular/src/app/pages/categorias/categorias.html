@@ -1,0 +1,380 @@
+<section class="categorias-page">
+
+  <!-- ENCABEZADO -->
+  <div class="encabezado-categorias">
+
+    <div class="encabezado-icono">
+      🗂️
+    </div>
+
+    <div>
+      <h1>Gestión de Categorías</h1>
+
+      <p>
+        Administra las categorías de vehículos utilizando
+        el servicio SOAP.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- MENSAJES -->
+
+  @if (mensaje) {
+    <div class="alerta exito">
+      <span>✓</span>
+      {{ mensaje }}
+    </div>
+  }
+
+  @if (error) {
+    <div class="alerta error">
+      <span>⚠</span>
+      {{ error }}
+    </div>
+  }
+
+
+  <!-- CONTENIDO PRINCIPAL -->
+
+  <div class="contenido-categorias">
+
+
+    <!-- FORMULARIO -->
+
+    <div class="panel formulario-panel">
+
+      <div class="panel-titulo">
+
+        <div class="panel-icono">
+          ✏️
+        </div>
+
+        <div>
+          <h2>
+            {{ editando ? 'Editar categoría' : 'Nueva categoría' }}
+          </h2>
+
+          <p>
+            {{ editando
+              ? 'Modifica los datos de la categoría'
+              : 'Ingresa los datos para registrar una categoría'
+            }}
+          </p>
+        </div>
+
+      </div>
+
+
+      <form (ngSubmit)="guardar()">
+
+        <!-- NOMBRE -->
+
+        <div class="campo">
+
+          <label for="nombre">
+            Nombre de la categoría
+          </label>
+
+          <div class="input-con-icono">
+            <span>🏷️</span>
+
+            <input
+              id="nombre"
+              type="text"
+              name="nombre"
+              [(ngModel)]="categoria.nombre"
+              placeholder="Ej. Automóvil"
+              required>
+          </div>
+
+        </div>
+
+
+        <!-- DESCRIPCIÓN -->
+
+        <div class="campo">
+
+          <label for="descripcion">
+            Descripción
+          </label>
+
+          <div class="textarea-con-icono">
+
+            <span>📝</span>
+
+            <textarea
+              id="descripcion"
+              name="descripcion"
+              [(ngModel)]="categoria.descripcion"
+              placeholder="Escribe una descripción..."
+              rows="5">
+            </textarea>
+
+          </div>
+
+        </div>
+
+
+        <!-- ESTADO -->
+
+        <div class="estado-box">
+
+          <div class="estado-icono">
+            🔵
+          </div>
+
+          <div class="estado-texto">
+
+            <strong>
+              Estado de la categoría
+            </strong>
+
+            <span>
+              Activa para utilizarla en los vehículos
+            </span>
+
+          </div>
+
+          <label class="switch">
+
+            <input
+              id="estado"
+              type="checkbox"
+              name="estado"
+              [(ngModel)]="categoria.estado">
+
+            <span class="slider"></span>
+
+          </label>
+
+        </div>
+
+
+        <!-- BOTONES -->
+
+        <div class="acciones-formulario">
+
+          <button
+            class="btn btn-principal"
+            type="submit">
+
+            <span>
+              {{ editando ? '💾' : '➕' }}
+            </span>
+
+            {{ editando ? 'Actualizar categoría' : 'Registrar categoría' }}
+
+          </button>
+
+
+          @if (editando) {
+
+            <button
+              class="btn btn-cancelar"
+              type="button"
+              (click)="cancelar()">
+
+              ↩ Cancelar
+
+            </button>
+
+          }
+
+        </div>
+
+      </form>
+
+    </div>
+
+
+    <!-- LISTADO -->
+
+    <div class="panel listado-panel">
+
+      <div class="titulo-listado">
+
+        <div>
+
+          <h2>
+            📋 Categorías registradas
+          </h2>
+
+          <p>
+            Consulta y administra las categorías existentes.
+          </p>
+
+        </div>
+
+
+        <button
+          class="btn btn-actualizar"
+          type="button"
+          (click)="cargarCategorias()">
+
+          🔄 Actualizar
+
+        </button>
+
+      </div>
+
+
+      @if (cargando) {
+
+        <div class="cargando">
+
+          <div class="spinner"></div>
+
+          <span>
+            Cargando categorías...
+          </span>
+
+        </div>
+
+      } @else {
+
+        <div class="tabla-contenedor">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>ID</th>
+
+                <th>Categoría</th>
+
+                <th>Descripción</th>
+
+                <th>Estado</th>
+
+                <th>Acciones</th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              @for (
+                item of categorias;
+                track item.idCategoria
+              ) {
+
+                <tr>
+
+                  <td>
+                    <span class="id-categoria">
+                      #{{ item.idCategoria }}
+                    </span>
+                  </td>
+
+
+                  <td>
+
+                    <div class="nombre-categoria">
+
+                      <span class="mini-icono">
+                        🚗
+                      </span>
+
+                      <strong>
+                        {{ item.nombre }}
+                      </strong>
+
+                    </div>
+
+                  </td>
+
+
+                  <td class="descripcion">
+                    {{ item.descripcion }}
+                  </td>
+
+
+                  <td>
+
+                    @if (item.estado) {
+
+                      <span class="badge activo">
+                        ● Activa
+                      </span>
+
+                    } @else {
+
+                      <span class="badge inactivo">
+                        ● Inactiva
+                      </span>
+
+                    }
+
+                  </td>
+
+
+                  <td class="acciones">
+
+                    <button
+                      class="accion editar"
+                      type="button"
+                      (click)="editar(item)">
+
+                      ✏️ Editar
+
+                    </button>
+
+
+                    <button
+                      class="accion eliminar"
+                      type="button"
+                      (click)="eliminar(item)">
+
+                      🗑️ Eliminar
+
+                    </button>
+
+                  </td>
+
+                </tr>
+
+              } @empty {
+
+                <tr>
+
+                  <td
+                    colspan="5"
+                    class="sin-datos">
+
+                    <div>
+                      📭
+                    </div>
+
+                    <strong>
+                      No existen categorías
+                    </strong>
+
+                    <span>
+                      Registra una nueva categoría para comenzar.
+                    </span>
+
+                  </td>
+
+                </tr>
+
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</section>

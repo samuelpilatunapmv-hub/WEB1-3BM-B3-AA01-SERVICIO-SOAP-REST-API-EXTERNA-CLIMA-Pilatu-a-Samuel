@@ -1,0 +1,458 @@
+<section class="pagina">
+
+  <!-- ENCABEZADO -->
+
+  <div class="encabezado">
+
+    <div class="icono-encabezado">
+      🔧
+    </div>
+
+    <div>
+      <h1>
+        Gestión de Mantenimientos
+      </h1>
+
+      <p>
+        Administración de mantenimientos mediante
+        el servicio REST.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- MENSAJES -->
+
+  @if (mensaje) {
+
+    <div class="alerta exito">
+      <span class="alerta-icono">✓</span>
+      {{ mensaje }}
+    </div>
+
+  }
+
+
+  @if (error) {
+
+    <div class="alerta error">
+      <span class="alerta-icono">!</span>
+      {{ error }}
+    </div>
+
+  }
+
+
+  <div class="grid">
+
+
+    <!-- FORMULARIO -->
+
+    <div class="card formulario">
+
+      <div class="titulo-card">
+
+        <div class="icono-card">
+          🛠️
+        </div>
+
+        <div>
+          <h2>
+            {{
+              editando
+                ? 'Editar mantenimiento'
+                : 'Nuevo mantenimiento'
+            }}
+          </h2>
+
+          <span>
+            Complete la información
+          </span>
+        </div>
+
+      </div>
+
+
+      <form (ngSubmit)="guardar()">
+
+
+        <div class="campo">
+
+          <label>
+            🚗 Vehículo
+          </label>
+
+          <select
+            name="vehiculo"
+            [(ngModel)]="mantenimiento.idVehiculo"
+            required>
+
+            @for (
+              vehiculo of vehiculos;
+              track vehiculo.idVehiculo
+            ) {
+
+              <option
+                [ngValue]="vehiculo.idVehiculo">
+
+                {{ vehiculo.marca }}
+                {{ vehiculo.modelo }}
+                - {{ vehiculo.placa }}
+
+              </option>
+
+            }
+
+          </select>
+
+        </div>
+
+
+        <div class="campo">
+
+          <label>
+            📅 Fecha
+          </label>
+
+          <input
+            type="date"
+            name="fecha"
+            [(ngModel)]="mantenimiento.fecha"
+            required>
+
+        </div>
+
+
+        <div class="campo">
+
+          <label>
+            🔩 Tipo de mantenimiento
+          </label>
+
+          <input
+            type="text"
+            name="tipo"
+            [(ngModel)]="mantenimiento.tipo"
+            placeholder="Ej. Cambio de aceite"
+            required>
+
+        </div>
+
+
+        <div class="campo">
+
+          <label>
+            📝 Descripción
+          </label>
+
+          <textarea
+            name="descripcion"
+            [(ngModel)]="mantenimiento.descripcion"
+            rows="4"
+            placeholder="Detalle del mantenimiento">
+          </textarea>
+
+        </div>
+
+
+        <div class="fila">
+
+          <div class="campo">
+
+            <label>
+              💵 Costo
+            </label>
+
+            <input
+              type="number"
+              name="costo"
+              [(ngModel)]="mantenimiento.costo"
+              min="0"
+              step="0.01">
+
+          </div>
+
+
+          <div class="campo">
+
+            <label>
+              📍 Kilometraje
+            </label>
+
+            <input
+              type="number"
+              name="kilometraje"
+              [(ngModel)]="mantenimiento.kilometraje"
+              min="0">
+
+          </div>
+
+        </div>
+
+
+        <div class="campo checkbox">
+
+          <input
+            id="estadoMantenimiento"
+            type="checkbox"
+            name="estado"
+            [(ngModel)]="mantenimiento.estado">
+
+          <label for="estadoMantenimiento">
+            Mantenimiento activo
+          </label>
+
+        </div>
+
+
+        <div class="acciones-formulario">
+
+          <button
+            type="submit"
+            class="btn principal">
+
+            {{ editando ? '✓ Actualizar' : '+ Registrar' }}
+
+          </button>
+
+
+          @if (editando) {
+
+            <button
+              type="button"
+              class="btn secundario"
+              (click)="cancelar()">
+
+              Cancelar
+
+            </button>
+
+          }
+
+        </div>
+
+      </form>
+
+    </div>
+
+
+    <!-- LISTADO -->
+
+    <div class="card lista">
+
+      <div class="titulo-lista">
+
+        <div>
+
+          <div class="titulo-lista-contenido">
+
+            <div class="icono-lista">
+              📋
+            </div>
+
+            <div>
+
+              <h2>
+                Mantenimientos registrados
+              </h2>
+
+              <span class="contador">
+                {{ mantenimientos.length }}
+                mantenimiento(s)
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="btn actualizar"
+          (click)="cargarMantenimientos()">
+
+          ↻ Actualizar
+
+        </button>
+
+      </div>
+
+
+      @if (cargando) {
+
+        <div class="estado-carga">
+
+          <span class="cargando-icono">
+            ⟳
+          </span>
+
+          <p>
+            Cargando mantenimientos...
+          </p>
+
+        </div>
+
+      } @else {
+
+        <div class="tabla-contenedor">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Vehículo</th>
+                <th>Tipo</th>
+                <th>Kilometraje</th>
+                <th>Costo</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              @for (
+                item of mantenimientos;
+                track item.idMantenimiento
+              ) {
+
+                <tr>
+
+                  <td>
+                    <span class="id">
+                      #{{ item.idMantenimiento }}
+                    </span>
+                  </td>
+
+
+                  <td>
+                    {{ item.fecha | slice:0:10 }}
+                  </td>
+
+
+                  <td>
+
+                    <span class="vehiculo">
+                      🚗
+                      {{
+                        obtenerNombreVehiculo(
+                          item.idVehiculo
+                        )
+                      }}
+                    </span>
+
+                  </td>
+
+
+                  <td>
+
+                    <strong>
+                      {{ item.tipo }}
+                    </strong>
+
+                    <small class="descripcion">
+                      {{ item.descripcion }}
+                    </small>
+
+                  </td>
+
+
+                  <td>
+                    <span class="dato">
+                      {{ item.kilometraje }} km
+                    </span>
+                  </td>
+
+
+                  <td>
+
+                    <span class="costo">
+                      ${{ item.costo }}
+                    </span>
+
+                  </td>
+
+
+                  <td>
+
+                    @if (item.estado) {
+
+                      <span class="badge activo">
+                        ● Activo
+                      </span>
+
+                    } @else {
+
+                      <span class="badge inactivo">
+                        ● Inactivo
+                      </span>
+
+                    }
+
+                  </td>
+
+
+                  <td class="acciones">
+
+                    <button
+                      class="btn editar"
+                      type="button"
+                      (click)="editar(item)">
+
+                      ✎ Editar
+
+                    </button>
+
+
+                    <button
+                      class="btn eliminar"
+                      type="button"
+                      (click)="eliminar(item)">
+
+                      🗑 Eliminar
+
+                    </button>
+
+                  </td>
+
+                </tr>
+
+              } @empty {
+
+                <tr>
+
+                  <td
+                    colspan="8"
+                    class="estado-carga">
+
+                    No existen mantenimientos registrados.
+
+                  </td>
+
+                </tr>
+
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</section>

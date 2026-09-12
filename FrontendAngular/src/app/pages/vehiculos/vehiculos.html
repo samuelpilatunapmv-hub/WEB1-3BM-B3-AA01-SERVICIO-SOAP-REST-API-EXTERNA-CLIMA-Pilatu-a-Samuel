@@ -1,0 +1,508 @@
+<section class="pagina">
+
+  <!-- ENCABEZADO -->
+  <div class="encabezado">
+
+    <div class="titulo-contenido">
+
+      <div class="icono-titulo">
+        🚘
+      </div>
+
+      <div>
+        <h1>
+          Gestión de Vehículos
+        </h1>
+
+        <p>
+          Administración de vehículos mediante
+          el servicio SOAP.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="etiqueta-servicio">
+      SOAP
+    </div>
+
+  </div>
+
+
+  <!-- MENSAJES -->
+
+  @if (mensaje) {
+
+    <div class="alerta exito">
+      <span>✓</span>
+      {{ mensaje }}
+    </div>
+
+  }
+
+
+  @if (error) {
+
+    <div class="alerta error">
+      <span>!</span>
+      {{ error }}
+    </div>
+
+  }
+
+
+  <!-- CONTENIDO -->
+
+  <div class="grid">
+
+
+    <!-- FORMULARIO -->
+
+    <div class="card formulario">
+
+      <div class="card-titulo">
+
+        <div class="numero">
+          01
+        </div>
+
+        <div>
+          <h2>
+            {{
+              editando
+                ? 'Editar vehículo'
+                : 'Nuevo vehículo'
+            }}
+          </h2>
+
+          <p>
+            Complete la información del vehículo
+          </p>
+        </div>
+
+      </div>
+
+
+      <form
+        (ngSubmit)="guardar()">
+
+
+        <div class="fila">
+
+          <div class="campo">
+
+            <label>
+              Placa
+            </label>
+
+            <input
+              type="text"
+              name="placa"
+              [(ngModel)]="vehiculo.placa"
+              placeholder="ABC-1234"
+              maxlength="20"
+              required>
+
+          </div>
+
+
+          <div class="campo">
+
+            <label>
+              Año
+            </label>
+
+            <input
+              type="number"
+              name="anio"
+              [(ngModel)]="vehiculo.anio"
+              min="1900"
+              max="2100"
+              required>
+
+          </div>
+
+        </div>
+
+
+        <div class="fila">
+
+          <div class="campo">
+
+            <label>
+              Marca
+            </label>
+
+            <input
+              type="text"
+              name="marca"
+              [(ngModel)]="vehiculo.marca"
+              placeholder="Toyota"
+              required>
+
+          </div>
+
+
+          <div class="campo">
+
+            <label>
+              Modelo
+            </label>
+
+            <input
+              type="text"
+              name="modelo"
+              [(ngModel)]="vehiculo.modelo"
+              placeholder="Corolla"
+              required>
+
+          </div>
+
+        </div>
+
+
+        <div class="campo">
+
+          <label>
+            Categoría
+          </label>
+
+          <select
+            name="categoria"
+            [(ngModel)]="vehiculo.idCategoria"
+            required>
+
+            @for (
+              categoria of categorias;
+              track categoria.idCategoria
+            ) {
+
+              <option
+                [ngValue]="categoria.idCategoria">
+
+                {{ categoria.nombre }}
+
+              </option>
+
+            }
+
+          </select>
+
+        </div>
+
+
+        <div class="campo">
+
+          <label>
+            Precio
+          </label>
+
+          <input
+            type="number"
+            name="precio"
+            [(ngModel)]="vehiculo.precio"
+            min="0"
+            step="0.01"
+            required>
+
+        </div>
+
+
+        <div class="campo checkbox">
+
+          <input
+            id="estadoVehiculo"
+            type="checkbox"
+            name="estado"
+            [(ngModel)]="vehiculo.estado">
+
+          <label
+            for="estadoVehiculo">
+
+            Vehículo activo
+
+          </label>
+
+        </div>
+
+
+        <div class="acciones-formulario">
+
+          <button
+            class="btn principal"
+            type="submit">
+
+            {{
+              editando
+                ? 'Actualizar vehículo'
+                : 'Registrar vehículo'
+            }}
+
+          </button>
+
+
+          @if (editando) {
+
+            <button
+              class="btn secundario"
+              type="button"
+              (click)="cancelar()">
+
+              Cancelar
+
+            </button>
+
+          }
+
+        </div>
+
+      </form>
+
+    </div>
+
+
+    <!-- LISTADO -->
+
+    <div class="card lista">
+
+      <div class="titulo-lista">
+
+        <div class="titulo-lista-texto">
+
+          <div class="numero">
+            02
+          </div>
+
+          <div>
+
+            <h2>
+              Vehículos registrados
+            </h2>
+
+            <span class="contador">
+
+              {{ vehiculos.length }}
+              vehículo(s)
+
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="btn actualizar"
+          type="button"
+          (click)="cargarVehiculos()">
+
+          ↻ Actualizar
+
+        </button>
+
+      </div>
+
+
+      @if (cargando) {
+
+        <div class="estado-carga">
+
+          <div class="spinner">
+            ⟳
+          </div>
+
+          Cargando vehículos...
+
+        </div>
+
+      } @else {
+
+
+        <div class="tabla-contenedor">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>ID</th>
+
+                <th>Vehículo</th>
+
+                <th>Placa</th>
+
+                <th>Año</th>
+
+                <th>Categoría</th>
+
+                <th>Precio</th>
+
+                <th>Estado</th>
+
+                <th>Acciones</th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              @for (
+                item of vehiculos;
+                track item.idVehiculo
+              ) {
+
+                <tr>
+
+                  <td>
+                    <span class="id">
+                      #{{ item.idVehiculo }}
+                    </span>
+                  </td>
+
+
+                  <td>
+
+                    <div class="vehiculo-nombre">
+
+                      <span class="vehiculo-icono">
+                        🚗
+                      </span>
+
+                      <strong>
+
+                        {{ item.marca }}
+                        {{ item.modelo }}
+
+                      </strong>
+
+                    </div>
+
+                  </td>
+
+
+                  <td>
+
+                    <span class="placa">
+
+                      {{ item.placa }}
+
+                    </span>
+
+                  </td>
+
+
+                  <td>
+
+                    {{ item.anio }}
+
+                  </td>
+
+
+                  <td>
+
+                    <span class="categoria">
+
+                      {{
+                        obtenerNombreCategoria(
+                          item.idCategoria
+                        )
+                      }}
+
+                    </span>
+
+                  </td>
+
+
+                  <td>
+
+                    <strong class="precio">
+
+                      ${{ item.precio }}
+
+                    </strong>
+
+                  </td>
+
+
+                  <td>
+
+                    @if (item.estado) {
+
+                      <span
+                        class="badge activo">
+
+                        ● Activo
+
+                      </span>
+
+                    } @else {
+
+                      <span
+                        class="badge inactivo">
+
+                        ● Inactivo
+
+                      </span>
+
+                    }
+
+                  </td>
+
+
+                  <td class="acciones">
+
+                    <button
+                      class="btn editar"
+                      type="button"
+                      (click)="editar(item)">
+
+                      ✎ Editar
+
+                    </button>
+
+
+                    <button
+                      class="btn eliminar"
+                      type="button"
+                      (click)="eliminar(item)">
+
+                      ✕ Eliminar
+
+                    </button>
+
+                  </td>
+
+                </tr>
+
+              } @empty {
+
+                <tr>
+
+                  <td
+                    colspan="8"
+                    class="estado-carga">
+
+                    No existen vehículos registrados.
+
+                  </td>
+
+                </tr>
+
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</section>

@@ -1,0 +1,44 @@
+<header class="navbar">
+
+  <div class="logo">
+    Sistema de Vehículos
+  </div>
+
+  <nav>
+    <a
+      routerLink="/"
+      routerLinkActive="activo"
+      [routerLinkActiveOptions]="{ exact: true }">
+      Inicio
+    </a>
+
+    <a
+      routerLink="/categorias"
+      routerLinkActive="activo">
+      Categorías
+    </a>
+
+    <a
+      routerLink="/vehiculos"
+      routerLinkActive="activo">
+      Vehículos
+    </a>
+
+    <a
+      routerLink="/mantenimientos"
+      routerLinkActive="activo">
+      Mantenimientos
+    </a>
+
+    <a
+      routerLink="/clima"
+      routerLinkActive="activo">
+      Clima
+    </a>
+  </nav>
+
+</header>
+
+<main class="contenido">
+  <router-outlet></router-outlet>
+</main>
