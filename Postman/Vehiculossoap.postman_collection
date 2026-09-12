@@ -1,0 +1,440 @@
+{
+  "info": {
+    "_postman_id": "810f9e63-27f2-464c-be99-70a6fb82904b",
+    "name": "Vehiculosoap",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57528395",
+    "_collection_link": "https://go.postman.co/collection/57528395-810f9e63-27f2-464c-be99-70a6fb82904b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "ActualizarVehiculo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://tempuri.org/IVehiculoService/ActualizarVehiculo",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\"\r\n    xmlns:veh=\"http://schemas.datacontract.org/2004/07/VehiculosSOAPDB.Models\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n\r\n        <tem:ActualizarVehiculo>\r\n\r\n            <tem:vehiculo>\r\n\r\n                <veh:Anio>2023</veh:Anio>\r\n                <veh:Estado>true</veh:Estado>\r\n                <veh:IdCategoria>1</veh:IdCategoria>\r\n                <veh:IdVehiculo>1</veh:IdVehiculo>\r\n                <veh:Marca>Toyota</veh:Marca>\r\n                <veh:Modelo>Corolla XLE</veh:Modelo>\r\n                <veh:Placa>ABC-1234</veh:Placa>\r\n                <veh:Precio>24500.00</veh:Precio>\r\n\r\n            </tem:vehiculo>\r\n\r\n        </tem:ActualizarVehiculo>\r\n\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5284/VehiculoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5284",
+          "path": [
+            "VehiculoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerCategorias",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://tempuri.org/IVehiculoService/ObtenerCategorias",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n\r\n        <tem:ObtenerCategorias/>\r\n\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5284/VehiculoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5284",
+          "path": [
+            "VehiculoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerVehiculos",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://tempuri.org/IVehiculoService/ObtenerVehiculos",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n        <tem:ObtenerVehiculos/>\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5284/VehiculoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5284",
+          "path": [
+            "VehiculoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AgregarVehiculo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://tempuri.org/IVehiculoService/AgregarVehiculo",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\"\r\n    xmlns:veh=\"http://schemas.datacontract.org/2004/07/VehiculosSOAPDB.Models\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n\r\n        <tem:AgregarVehiculo>\r\n\r\n            <tem:vehiculo>\r\n\r\n                <veh:Anio>2025</veh:Anio>\r\n                <veh:Estado>true</veh:Estado>\r\n                <veh:IdCategoria>1</veh:IdCategoria>\r\n                <veh:IdVehiculo>0</veh:IdVehiculo>\r\n                <veh:Marca>Hyundai</veh:Marca>\r\n                <veh:Modelo>Elantra</veh:Modelo>\r\n                <veh:Placa>MNO-7890</veh:Placa>\r\n                <veh:Precio>25000.00</veh:Precio>\r\n\r\n            </tem:vehiculo>\r\n\r\n        </tem:AgregarVehiculo>\r\n\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5284/VehiculoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5284",
+          "path": [
+            "VehiculoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "EliminarVehiculo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://tempuri.org/IVehiculoService/EliminarVehiculo",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n\r\n        <tem:EliminarVehiculo>\r\n            <tem:id>5</tem:id>\r\n        </tem:EliminarVehiculo>\r\n\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5284/VehiculoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5284",
+          "path": [
+            "VehiculoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerVehiculosPorMarca",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://tempuri.org/IVehiculoService/ObtenerVehiculosPorMarca",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n\r\n        <tem:ObtenerVehiculosPorMarca>\r\n            <tem:marca>Toyota</tem:marca>\r\n        </tem:ObtenerVehiculosPorMarca>\r\n\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5284/VehiculoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5284",
+          "path": [
+            "VehiculoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerVehiculosPorCategoria",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://tempuri.org/IVehiculoService/ObtenerVehiculosPorCategoria",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n\r\n        <tem:ObtenerVehiculosPorCategoria>\r\n            <tem:idCategoria>2</tem:idCategoria>\r\n        </tem:ObtenerVehiculosPorCategoria>\r\n\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5284/VehiculoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5284",
+          "path": [
+            "VehiculoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AgregarCategoria",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://tempuri.org/IVehiculoService/AgregarCategoria",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\"\r\n    xmlns:cat=\"http://schemas.datacontract.org/2004/07/VehiculosSOAPDB.Models\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n\r\n        <tem:AgregarCategoria>\r\n\r\n            <tem:categoria>\r\n\r\n                <cat:Descripcion>Vehiculos familiares</cat:Descripcion>\r\n                <cat:Estado>true</cat:Estado>\r\n                <cat:IdCategoria>0</cat:IdCategoria>\r\n                <cat:Nombre>SUV</cat:Nombre>\r\n\r\n            </tem:categoria>\r\n\r\n        </tem:AgregarCategoria>\r\n\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5284/VehiculoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5284",
+          "path": [
+            "VehiculoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ActualizarCategoria",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://tempuri.org/IVehiculoService/ActualizarCategoria",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\"\r\n    xmlns:cat=\"http://schemas.datacontract.org/2004/07/VehiculosSOAPDB.Models\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n\r\n        <tem:ActualizarCategoria>\r\n\r\n            <tem:categoria>\r\n\r\n                <cat:Descripcion>Vehiculos familiares actualizados</cat:Descripcion>\r\n                <cat:Estado>true</cat:Estado>\r\n                <cat:IdCategoria>1</cat:IdCategoria>\r\n                <cat:Nombre>SUV Premium</cat:Nombre>\r\n\r\n            </tem:categoria>\r\n\r\n        </tem:ActualizarCategoria>\r\n\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5284/VehiculoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5284",
+          "path": [
+            "VehiculoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "EliminarCategoria",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://tempuri.org/IVehiculoService/EliminarCategoria",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n\r\n        <tem:EliminarCategoria>\r\n            <tem:id>1</tem:id>\r\n        </tem:EliminarCategoria>\r\n\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5284/VehiculoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5284",
+          "path": [
+            "VehiculoService.svc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerVehiculo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8",
+            "type": "text"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://tempuri.org/IVehiculoService/ObtenerVehiculo",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:tem=\"http://tempuri.org/\">\r\n\r\n    <soap:Header/>\r\n\r\n    <soap:Body>\r\n\r\n        <tem:ObtenerVehiculo>\r\n            <tem:id>1</tem:id>\r\n        </tem:ObtenerVehiculo>\r\n\r\n    </soap:Body>\r\n\r\n</soap:Envelope>",
+          "options": {
+            "raw": {
+              "language": "xml"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5284/VehiculoService.svc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5284",
+          "path": [
+            "VehiculoService.svc"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

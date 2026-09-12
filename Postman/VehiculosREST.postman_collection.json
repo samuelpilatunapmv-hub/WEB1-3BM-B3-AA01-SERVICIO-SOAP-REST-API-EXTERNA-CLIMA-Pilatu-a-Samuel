@@ -1,0 +1,166 @@
+{
+  "info": {
+    "_postman_id": "c0a5d0b9-79da-4dd4-a329-ed7d3b77ac2f",
+    "name": "VehiculosREST",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57528395",
+    "_collection_link": "https://go.postman.co/collection/57528395-c0a5d0b9-79da-4dd4-a329-ed7d3b77ac2f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "ObtenerMantenimientos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5234/api/Mantenimiento",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5234",
+          "path": [
+            "api",
+            "Mantenimiento"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerMantenimiento",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5234/api/Mantenimiento/3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5234",
+          "path": [
+            "api",
+            "Mantenimiento",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerMantenimientosPorVehiculo",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5234/api/Mantenimiento/vehiculo/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5234",
+          "path": [
+            "api",
+            "Mantenimiento",
+            "vehiculo",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AgregarMantenimiento",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"idMantenimiento\": 0,\r\n  \"fecha\": \"2026-09-02\",\r\n  \"tipo\": \"Cambio de aceite\",\r\n  \"descripcion\": \"Cambio de aceite y filtro del motor\",\r\n  \"costo\": 75.00,\r\n  \"kilometraje\": 16000,\r\n  \"estado\": true,\r\n  \"idVehiculo\": 2\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5234/api/Mantenimiento",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5234",
+          "path": [
+            "api",
+            "Mantenimiento"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ActualizarMantenimiento",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"idMantenimiento\": 7,\r\n  \"fecha\": \"2026-09-02\",\r\n  \"tipo\": \"Mantenimiento completo\",\r\n  \"descripcion\": \"Cambio de aceite, filtros y revision general\",\r\n  \"costo\": 150.00,\r\n  \"kilometraje\": 17000,\r\n  \"estado\": true,\r\n  \"idVehiculo\": 3\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5234/api/Mantenimiento/7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5234",
+          "path": [
+            "api",
+            "Mantenimiento",
+            "7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "EliminarMantenimiento",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5234/api/Mantenimiento/7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5234",
+          "path": [
+            "api",
+            "Mantenimiento",
+            "7"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
